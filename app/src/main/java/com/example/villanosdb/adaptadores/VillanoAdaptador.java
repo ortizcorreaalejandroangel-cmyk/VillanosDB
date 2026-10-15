@@ -1,5 +1,7 @@
 package com.example.villanosdb.adaptadores;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -82,6 +84,32 @@ public class VillanoAdaptador extends RecyclerView.Adapter<VillanoAdaptador.View
             pastilla.setCornerRadius(60f);
             pastilla.setColor(Color.parseColor(v.isDerrotado() ? "#B71C1C" : "#2E7D32"));
             txtEstado.setBackground(pastilla);
+
+            img.setOnClickListener(vista -> mostrarImagenGrande(v));
+        }
+
+        private void mostrarImagenGrande(Villano v) {
+            Context ctx = itemView.getContext();
+            Dialog dialog = new Dialog(ctx, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+            dialog.setContentView(R.layout.dialog_villano);
+
+            View root = dialog.findViewById(R.id.dialog_root);
+            ImageView imgGrande = dialog.findViewById(R.id.img_grande);
+            TextView nombre = dialog.findViewById(R.id.txt_nombre_grande);
+            TextView saga = dialog.findViewById(R.id.txt_saga_grande);
+
+            root.setBackgroundColor(Color.parseColor(v.getColor()));
+            imgGrande.setImageResource(v.getImagen());
+            nombre.setText(v.getNombre().toUpperCase());
+            saga.setText(v.getSaga());
+
+            imgGrande.setScaleX(0.4f);
+            imgGrande.setScaleY(0.4f);
+            imgGrande.setAlpha(0f);
+            imgGrande.animate().scaleX(1f).scaleY(1f).alpha(1f).setDuration(300).start();
+
+            root.setOnClickListener(vista -> dialog.dismiss());
+            dialog.show();
         }
     }
 }
