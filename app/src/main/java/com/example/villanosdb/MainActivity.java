@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         rcvVillanos = findViewById(R.id.rcv_villanos);
 
-        listaVillanos.add(new Villano(R.drawable.freezer, "Freezer", "Raza Freezer",
+        listaVillanos.add(new Villano(R.drawable.freezer, "Freezer", "Frost Demons",
                 "Saga de Freezer", true, "Goku",
                 "52.71 Septillion", 80,
                 "Tirano espacial que destruyó el planeta Vegeta y busca la inmortalidad.",
